@@ -1,7 +1,9 @@
 <?php
 
 /**
- * bikes_Collection_Abstract 
+ * This class holds instances of a model's value objects (VO, bikes_VO_Abstract).
+ * It contains a few methods to help with organization and retrieval of those
+ * classes.
  * 
  * @uses ArrayAccess
  * @uses Iterator
@@ -15,15 +17,15 @@
 abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 
 	/**
-	 * app 
+	 * Holds an instance of bikes_App
 	 * 
-	 * @var mixed
+	 * @var bikes_App
 	 * @access protected
 	 */
 	protected $app;
 
 	/**
-	 * vos 
+	 * Array of bikes_VO_Abstract instances
 	 * 
 	 * @var array
 	 * @access protected
@@ -31,7 +33,7 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	protected $vos = array();
 
 	/**
-	 * idSet 
+	 * Id's of every VO object in the collection
 	 * 
 	 * @var array
 	 * @access protected
@@ -39,7 +41,7 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	protected $idSet = array();
 
 	/**
-	 * __construct 
+	 * The Constructor
 	 * 
 	 * @param bikes_App $app 
 	 * @access public
@@ -50,7 +52,9 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	}
 
 	/**
-	 * __call 
+	 * Used for method calls on specific "columns" in the VOs.
+	 * I.E. ->getAllName('Kyle'); will return all VOs with the
+	 * value 'Kyle' in the "name" column.
 	 * 
 	 * @param string $name 
 	 * @param mixed $args 
@@ -103,7 +107,7 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	}
 
 	/**
-	 * countVOs 
+	 * Counts the amount of VO objects stored in the collection.
 	 * 
 	 * @access public
 	 * @return void
@@ -236,6 +240,7 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	 * This method is called by ArrayAccess method $this->offsetGet().
 	 *
 	 * @param $object
+	 * @access protected
 	 * @return mixed
 	 */
 	protected function getObject($object){
@@ -245,6 +250,7 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 	/**
 	 * Getter method to grab the current VO indexes.
 	 *
+	 * @access public
 	 * @return array $ids
 	 */
 	public function getIds(){
@@ -253,15 +259,6 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 			$ids[] = $key;
 		}*/
 		return (array)$this->idSet;
-	}
-
-	/**
-	 * Counts the current VOs in the collection.
-	 *
-	 * @return integer
-	 */
-	public function coundVOs(){
-		return (integer)count($this->vos);
 	}
 
 	/**
@@ -322,6 +319,12 @@ abstract class bikes_Collection_Abstract implements ArrayAccess, Iterator{
 		return $split;
 	}
 
+	/**
+	 * Checks if the collection contains 0 VO objects
+	 * 
+	 * @access public
+	 * @return boolean true|false
+	 */
 	public function isEmpty(){
 		if(empty($this->vos)){
 			return true;
