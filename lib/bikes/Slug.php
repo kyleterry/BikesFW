@@ -1,23 +1,29 @@
 <?php
 
+/**
+ * Class to generate a URL Slug
+ * TODO needs utf-8 and general unicode support
+ * 
+ * @package BikesFW
+ * @version $id$
+ * @copyright 2009
+ * @author Kyle Terry <kyle@kyleterry.com>
+ * @license BSD (Inlcuded)
+ */
 class bikes_Slug{
 	
 	/**
 	 * 
-	 * @var bikes_App
-	 */
-	protected $app;
-	
-	/**
-	 * 
+	 * @access public
 	 * @return void
 	 */
 	public function __construct(){
-		$this->app = $app;
 	}
 	
 	/**
 	 * 
+	 * @static
+	 * @access protected
 	 * @param string $value
 	 * @return string
 	 */
